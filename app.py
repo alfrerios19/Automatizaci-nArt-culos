@@ -115,7 +115,7 @@ def publish_article(req: PublishRequest):
         )
 
         cover_properties = json.dumps({
-            "background-image": f"url('/web/image/ir.attachment/{attachment_id}/datas')",
+            "background-image": f"url('/web/image/ir.attachment/{attachment_id}/')",
             "resize_class": "cover",
             "opacity": "0"
         })
@@ -150,6 +150,7 @@ def publish_article(req: PublishRequest):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 
 
