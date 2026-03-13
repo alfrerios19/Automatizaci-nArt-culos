@@ -57,17 +57,13 @@ def odoo_call(model: str, method: str, args: list, request_id: int = 1):
 
 
 def generate_image_base64(prompt: str):
-    result = client.images.generate(
-        model="gpt-image-1",
-        prompt=prompt,
-        size="1536x1024"
+
+    # Imagen de prueba (1x1 pixel blanco)
+    test_image_base64 = (
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII="
     )
 
-    image_b64 = result.data[0].b64_json
-    if not image_b64:
-        raise Exception("No se recibió base64 de la imagen")
-
-    return image_b64, "image/png"
+    return test_image_base64, "image/png""image/png"
 
 
 @app.get("/health")
@@ -142,3 +138,4 @@ def publish_article(req: PublishRequest):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
