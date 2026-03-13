@@ -79,20 +79,20 @@ def publish_article(req: PublishRequest):
         post_id = odoo_call(
             "blog.post",
             "create",
-            [{
+            [[{
                 "name": req.title,
                 "content": req.html,
                 "subtitle": req.subtitle,
                 "blog_id": ODOO_BLOG_ID,
                 "website_published": True
-            }],
+            }]],
             request_id=1
         )
 
         attachment_id = odoo_call(
             "ir.attachment",
             "create",
-            [{
+            [[{
                 "name": f"cover_{post_id}.png",
                 "res_model": "blog.post",
                 "res_id": post_id,
@@ -100,7 +100,7 @@ def publish_article(req: PublishRequest):
                 "public": True,
                 "mimetype": mimetype,
                 "datas": image_b64
-            }],
+            }]],
             request_id=2
         )
 
@@ -138,5 +138,6 @@ def publish_article(req: PublishRequest):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 
